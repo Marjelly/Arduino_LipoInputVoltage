@@ -1,6 +1,7 @@
 int BatteryVoltageInput(A5);
 
 int BatteryProzent=0;
+int BatteryProzentOld=0;
 float BatteryVoltageVar=0;
 
 
@@ -55,14 +56,22 @@ void loop() {
   }
 
 void BatteryVoltageOutput(){
-  for(int x=1;x>=21;x++){
-    if(BatteryVoltage[x]<=BatteryVoltageInput&&BatteryVoltage[x+1]>BatteryVoltageInput){
-      BatteryProzent=BatteryProzentNumbers[x];
-      Serial.println(BatteryProzent);
-      goto A;
+  BatteryProzent=0;
+  for(int y=1;y<22;y++){
+   if(BatteryVoltageVar>=BatteryVoltage[y]){
+    BatteryProzentOld=BatteryProzentNumbers[y];
+    if(BatteryProzentOld>BatteryProzent){
+      BatteryProzent=BatteryProzentOld;}
+    
+    }
+     
+      
       }
+       Serial.println(BatteryProzent);
+      }
+       
+      
       
     
-  }
-  A: ;
-}
+  
+  
